@@ -14,14 +14,14 @@
 //Pages Routes...
 Route::get('/','PagesController@home');
 
-//Admin Routes...
 Route::get('home','HomeController@index');
 
 Route::group(['prefix' => 'admin', 
     'namespace' => 'Admin', 
     'middleware' => 'auth'], 
     function() {
-    Route::get('posts','PostsController@index');
+    //Admin Routes...
+    Route::get('posts','PostsController@index')->name('admin.posts.index');
 });
 
 
