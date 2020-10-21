@@ -3,11 +3,11 @@
 @section('header')
 
       <h1>
-        Todas las publicaciones
-        <small>Optional description</small>
+        POSTS
+        <small>Todas las publicaciones</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> Inicio</a></li>
         <li class="active">Posts</li>
       </ol>
 
@@ -51,3 +51,28 @@
 <!-- /.box -->
 
 @stop
+
+@push('styles')
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{{asset('adminlte/plugins/datatables/dataTables.bootstrap.css')}}">
+@endpush
+
+@push('scripts')
+<!-- DataTables -->
+<script src="{{asset('adminlte/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('adminlte/plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
+
+
+<script>
+  $(function () {
+    $('#posts-table').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+  });
+</script>
+@endpush
