@@ -17,7 +17,8 @@
 @section('content')
 
 <div class="row">
-  <form action="">
+  <form method="POST" action="{{ route('admin.posts.store') }}">
+    {{ csrf_field() }}
     <div class="col-md-8">
       <!-- /.box -->
       <div class="box box primary">
@@ -54,7 +55,7 @@
           <!-- Categories -->
           <div class="form-group">
             <label>Categoría:</label>
-            <select name="category_id" id="" class="form-control">
+            <select name="category" id="" class="form-control">
               <option value="" selected disabled>Selecciona una categoría</option>
               @foreach($categories as $category)
                 <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -65,9 +66,13 @@
           <!-- Tags -->
           <div class="form-group">
             <label>Etiquetas</label>
-            <select class="form-control select2" multiple="multiple" data-placeholder="Selecciona una o más etiquetas" style="width: 100%;">
+            <select name="tags[]" 
+                    class="form-control select2" 
+                    multiple="multiple" 
+                    data-placeholder="Selecciona una o más etiquetas" 
+                    style="width: 100%;">
               @foreach($tags as $tag)
-                  <option id="{{ $tag->id }}">{{ $tag->name }}</option>
+                  <option value="{{ $tag->id }}">{{ $tag->name }}</option>
               @endforeach
             </select>
           </div>
@@ -92,6 +97,7 @@
 
 @stop
 
+<!-- Estilos de la página -->
 @push('styles')
 <!-- Select2 -->
 <link rel="stylesheet" href="{{asset('adminlte/plugins/select2/select2.min.css')}}">
@@ -99,6 +105,9 @@
 <link rel="stylesheet" href="{{asset('adminlte/plugins/datepicker/datepicker3.css')}}">
 @endpush
 
+<!-- /Estilos de la página -->
+
+<!-- Scripts de la página -->
 @push('scripts')
 
 <!-- Select2 Multiple -->
@@ -118,4 +127,6 @@ $('#datepicker').datepicker({
 //CK EDITOR
 CKEDITOR.replace('editor');
 </script>
+
 @endpush
+<!-- Scripts de la página -->

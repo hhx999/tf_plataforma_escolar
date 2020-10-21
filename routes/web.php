@@ -26,6 +26,7 @@ Route::group(['prefix' => 'admin',
     
 	Route::get('posts/create','PostsController@create')->name('admin.posts.create');
 
+	Route::post('posts','PostsController@store')->name('admin.posts.store');
 });
 
 
