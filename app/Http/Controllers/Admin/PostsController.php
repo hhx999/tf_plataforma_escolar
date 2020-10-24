@@ -37,6 +37,7 @@ class PostsController extends Controller
         );
         $post = new Post;
         $post->title = $request->title;
+        $post->url = str_slug($request->title,'_');
         $post->body = $request->body;
         $post->excerpt = $request->excerpt;
         $post->published_at = $request->published_at ? Carbon::parse($request->published_at) : null;
