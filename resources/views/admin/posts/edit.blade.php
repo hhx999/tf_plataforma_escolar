@@ -93,6 +93,13 @@
             {!! $errors->first('excerpt','<span class="help-block">:message</span>') !!}
           </div>
           <!-- /Extracto -->
+          <!-- Imágenes -->
+          	<div class="form-group">
+          		<div class="dropzone">
+          			
+          		</div>
+          	</div>
+          <!--/ -->
           <!-- -->
           <div class="form-group">
             <button type="submit" class="btn btn-primary btn-block">Guardar</button>
@@ -109,6 +116,7 @@
 
 <!-- Estilos de la página -->
 @push('styles')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.0.1/dropzone.css">
 <!-- Select2 -->
 <link rel="stylesheet" href="{{asset('adminlte/plugins/select2/select2.min.css')}}">
 <!-- bootstrap datepicker -->
@@ -119,7 +127,7 @@
 
 <!-- Scripts de la página -->
 @push('scripts')
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.0.1/min/dropzone.min.js"></script>
 <!-- Select2 Multiple -->
 <script src="{{asset('adminlte/plugins/select2/select2.full.min.js')}}"></script>
 <!-- CK Editor -->
@@ -136,6 +144,17 @@ $('#datepicker').datepicker({
 });
 //CK EDITOR
 CKEDITOR.replace('editor');
+
+new Dropzone('.dropzone', {
+	url: '/admin/posts/{{ $post->url }}/photos',
+  headers: {
+    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+  },
+	dictDefaultMessage: 'Arrastra las fotos aquí para subirlas'
+});
+
+Dropzone.autoDiscover = false;
+
 </script>
 
 @endpush
