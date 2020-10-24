@@ -1,6 +1,6 @@
 <?php
 
-namespace PlataformaEDUCA\Providers;
+namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

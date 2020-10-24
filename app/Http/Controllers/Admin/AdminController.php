@@ -1,9 +1,9 @@
 <?php
 
-namespace PlataformaEDUCA\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use PlataformaEDUCA\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {

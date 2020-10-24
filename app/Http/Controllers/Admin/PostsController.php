@@ -1,14 +1,14 @@
 <?php
 
-namespace PlataformaEDUCA\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin;
 
-use PlataformaEDUCA\Post;
-use PlataformaEDUCA\Tag;
-use PlataformaEDUCA\Category;
+use App\Post;
+use App\Tag;
+use App\Category;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use PlataformaEDUCA\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 
 class PostsController extends Controller
 {
@@ -26,6 +26,24 @@ class PostsController extends Controller
     }
     public function store(Request $request)
     {
+        $this->validate($request,[
+            'title' => 'required'
+        ]);
+        $post = Post::create(['title' => $request->title,
+                                'url' => str_slug($request->title,'_')
+                            ]);
+        
+        return redirect()->route('admin.posts.edit',$post);
+    }    
+    public function edit(Post $post)
+    {
+        $tags = Tag::all();
+        $categories = Category::all();
+
+        return view('admin.posts.edit', compact('categories','tags', 'post'));
+    }
+    public function update(Post $post, Request $request)
+    {
         //validación
         $this->validate($request,[
             'title' => 'required',
@@ -35,7 +53,7 @@ class PostsController extends Controller
             'excerpt' => 'required',
         ]
         );
-        $post = new Post;
+
         $post->title = $request->title;
         $post->url = str_slug($request->title,'_');
         $post->body = $request->body;
@@ -44,8 +62,8 @@ class PostsController extends Controller
         $post->category_id = $request->category;
         $post->save();
  
-        $post->tags()->attach($request->tags);
+        $post->tags()->sync($request->tags);
 
-        return back()->with('flash', 'Tu publicación ha sido creada.');
+        return redirect()->route('admin.posts.edit',$post)->with('flash', 'Tu publicación ha sido guardada.');
     }
 }
