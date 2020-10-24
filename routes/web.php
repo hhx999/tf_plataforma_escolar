@@ -13,6 +13,7 @@
 
 //Pages Routes...
 Route::get('/','PagesController@home');
+Route::get('blog/{id}','PostsController@show');
 
 
 Route::group(['prefix' => 'admin', 
