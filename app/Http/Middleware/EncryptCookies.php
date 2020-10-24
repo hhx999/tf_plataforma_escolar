@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace PlataformaEDUCA\Http\Middleware;
 
 use Illuminate\Cookie\Middleware\EncryptCookies as Middleware;
 

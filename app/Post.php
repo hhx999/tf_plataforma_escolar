@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace PlataformaEDUCA;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;

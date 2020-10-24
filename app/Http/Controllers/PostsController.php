@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace PlataformaEDUCA\Http\Controllers;
 
-use App\Post;
+use PlataformaEDUCA\Post;
 
 use Illuminate\Http\Request;
 

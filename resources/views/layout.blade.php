@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>{{config('app.name')}}</title>
+    <title>@yield('meta-title', config('app.name') )</title>
+    <meta name="description" content="@yield('meta-description','Esta es la plataforma educa dedicada al manejo de tareas y eventos en los colegios.')">
     <link rel="stylesheet" href="/css/normalize.css">
     <link rel="stylesheet" href="/css/framework.css">
     <link rel="stylesheet" href="/css/style.css">

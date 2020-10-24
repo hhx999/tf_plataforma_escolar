@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Plataforma EDUCA'),
+    'name' => env('APP_NAME', 'PlataformaEDUCA'),
 
     /*
     |--------------------------------------------------------------------------
@@ -171,11 +171,11 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        PlataformaEDUCA\Providers\AppServiceProvider::class,
+        PlataformaEDUCA\Providers\AuthServiceProvider::class,
+        // PlataformaEDUCA\Providers\BroadcastServiceProvider::class,
+        PlataformaEDUCA\Providers\EventServiceProvider::class,
+        PlataformaEDUCA\Providers\RouteServiceProvider::class,
 
     ],
 

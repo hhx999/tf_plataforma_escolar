@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace PlataformaEDUCA\Http\Controllers\Admin;
 
-use App\Post;
-use App\Tag;
-use App\Category;
+use PlataformaEDUCA\Post;
+use PlataformaEDUCA\Tag;
+use PlataformaEDUCA\Category;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use PlataformaEDUCA\Http\Controllers\Controller;
 
 class PostsController extends Controller
 {
