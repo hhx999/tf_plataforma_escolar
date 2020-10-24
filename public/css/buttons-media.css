@@ -1,0 +1,5 @@
+.buttons-social-media-share .share-buttons li{
+    list-style-type: none !important;
+    float: left;
+    margin-right: 10px;
+}

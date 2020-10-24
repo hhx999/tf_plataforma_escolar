@@ -5,6 +5,7 @@
 
 @section('content')
 
+
   <article class="post image-w-text container">
     <div class="content-post">
       <header class="container-flex space-between">
@@ -25,12 +26,7 @@
         </div>
 
         <footer class="container-flex space-between">
-          <div class="buttons-social-media-share">
-            <ul class="share-buttons">
-              <li><a href="https://www.facebook.com/sharer/sharer.php?u=&t=" title="Share on Facebook" target="_blank"><img alt="Share on Facebook" src="{{asset('img/flat_icons/Facebook.svg')}}" style="width: 25px;"></a></li>
-              <li><a href="https://twitter.com/intent/tweet?source=&text=:%20" target="_blank" title="Tweet"><img alt="Tweet" src="{{asset('img/flat_icons/Twitter.svg')}}" style="width: 25px;"></a></li>
-            </ul>
-          </div>
+          @include('partials.social-links',['description' => $post->title])
           <div class="tags container-flex">
             @foreach($post->tags as $tag)
                 <span class="tag c-gray-1 text-capitalize">#{{$tag->name}}</span>
@@ -50,4 +46,8 @@
 
 @push('scripts')
 <script id="dsq-count-scr" src="//zendero.disqus.com/count.js" async></script>
+@endpush
+
+@push('styles')
+<link rel="stylesheet" href="{{asset('css/buttons-media.css')}}">
 @endpush
