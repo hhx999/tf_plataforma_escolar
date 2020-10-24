@@ -35,16 +35,14 @@ class PostsController extends Controller
             'excerpt' => 'required',
         ]
         );
-        //return Post::create($request->all());
-
         $post = new Post;
         $post->title = $request->title;
         $post->body = $request->body;
         $post->excerpt = $request->excerpt;
-        $post->published_at = $request->has('published_at') ? Carbon::parse($request->published_at) : null;
+        $post->published_at = $request->published_at ? Carbon::parse($request->published_at) : null;
         $post->category_id = $request->category;
         $post->save();
-
+ 
         $post->tags()->attach($request->tags);
 
         return back()->with('flash', 'Tu publicación ha sido creada.');
