@@ -13,7 +13,7 @@
 
 //Pages Routes...
 Route::get('/','PagesController@home');
-Route::get('blog/{post}','PostsController@show');
+Route::get('blog/{post}','PostsController@show')->name('posts.show');
 
 
 Route::group(['prefix' => 'admin', 
@@ -34,8 +34,6 @@ Route::group(['prefix' => 'admin',
 	Route::put('posts/{post}','PostsController@update')->name('admin.posts.update');
 
 	Route::post('posts/{post}/photos','PhotosController@store')->name('admin.posts.photos.store');
-
-	Route::get('posts/show/{post}','PhotosController@show')->name('admin.posts.show');
 });
 
 
