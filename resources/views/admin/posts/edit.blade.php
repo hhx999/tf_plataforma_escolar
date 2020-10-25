@@ -33,7 +33,6 @@
                 <textarea name="body" id="editor" class="form-control" id="" rows="10" placeholder="Ingresa el contenido de la publicación">{{ old('body', $post->body) }}</textarea>
                 {!! $errors->first('body','<span class="help-block">:message</span>') !!}
               </div>
-
             </div>
           <!-- /.box-body -->
       </div>
@@ -105,6 +104,23 @@
             <button type="submit" class="btn btn-primary btn-block">Guardar</button>
           </div>
           <!-- -->
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="box box-primary">
+        <div class="box-body">
+          <div class="row">
+            @foreach($post->photos as $photo)
+              <form method="POST" action="{{ route('admin.photos.destroy', $photo) }}">
+                {{ method_field('DELETE') }} {{ csrf_field() }}
+                <div class="col-md-2">
+                  <button class="btn btn-danger btn-xs" style="position: absolute;"><i class="fa fa-remove"></i></button>
+                  <img src="{{ url($photo->url) }}" class="img-responsive">
+                </div>
+              </form>
+            @endforeach
+          </div>
         </div>
       </div>
     </div>
