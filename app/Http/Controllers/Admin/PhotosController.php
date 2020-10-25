@@ -22,6 +22,6 @@ class PhotosController extends Controller
     	Photo::create([
     		'url' => Storage::url($photo),
     		'post_id' => $post->id
-    	])
+    	]);
     }
 }

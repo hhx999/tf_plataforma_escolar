@@ -26,7 +26,7 @@ class Post extends Model
     }
     public function photos()
     {
-        return $this->hasMany(Photos::class);
+        return $this->hasMany(Photo::class);
     }
     public function scopePublished($query)
     {
