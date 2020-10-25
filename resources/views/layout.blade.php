@@ -14,8 +14,6 @@
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 
     @stack('styles')
-    @stack('scripts')
-
 
 </head>
 <body>
@@ -67,6 +65,8 @@
             </div>
         </footer>
     </section>
-    
+
+@stack('scripts')
+
 </body>
 </html>
