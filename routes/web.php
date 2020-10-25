@@ -34,6 +34,8 @@ Route::group(['prefix' => 'admin',
 	Route::put('posts/{post}','PostsController@update')->name('admin.posts.update');
 
 	Route::post('posts/{post}/photos','PhotosController@store')->name('admin.posts.photos.store');
+
+	Route::get('posts/show/{post}','PhotosController@show')->name('admin.posts.show');
 });
 
 

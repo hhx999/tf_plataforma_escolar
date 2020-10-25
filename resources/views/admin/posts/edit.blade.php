@@ -166,4 +166,4 @@ Dropzone.autoDiscover = false;
 </script>
 
 @endpush
-<!-- Scripts de la página -->
+<!-- /Scripts de la página -->
