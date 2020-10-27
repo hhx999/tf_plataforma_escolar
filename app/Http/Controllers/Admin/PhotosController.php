@@ -26,7 +26,11 @@ class PhotosController extends Controller
     }
     public function destroy(Photo $photo)
     {
+        //Eliminamos registro de base de datos
     	$photo->delete();
+        //Eliminamos archivo de servidor
+        $photoPath = str_replace('storage','public',$photo->url);
+        Storage::delete($photoPath);
 
     	return back()->with('flash','Foto eliminada.');
     }

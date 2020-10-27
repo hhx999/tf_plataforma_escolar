@@ -17,6 +17,25 @@
 @section('content')
 
 <div class="row">
+  @if($post->photos->count())
+    <div class="col-md-12">
+      <div class="box box-primary">
+        <div class="box-body">
+          <div class="row">
+            @foreach($post->photos as $photo)
+              <form method="POST" action="{{ route('admin.photos.destroy', $photo) }}">
+                {{ method_field('DELETE') }} {{ csrf_field() }}
+                <div class="col-md-2">
+                  <button class="btn btn-danger btn-xs" style="position: absolute;"><i class="fa fa-remove"></i></button>
+                  <img src="{{ url($photo->url) }}" class="img-responsive">
+                </div>
+              </form>
+            @endforeach
+          </div>
+        </div>
+      </div>
+    </div>
+  @endif
   <form method="POST" action="{{ route('admin.posts.update', $post) }}">
     {{ csrf_field() }} {{ method_field('PUT') }}
     <div class="col-md-8">
@@ -107,25 +126,9 @@
         </div>
       </div>
     </div>
-    <div class="col-md-8">
-      <div class="box box-primary">
-        <div class="box-body">
-          <div class="row">
-            @foreach($post->photos as $photo)
-              <form method="POST" action="{{ route('admin.photos.destroy', $photo) }}">
-                {{ method_field('DELETE') }} {{ csrf_field() }}
-                <div class="col-md-2">
-                  <button class="btn btn-danger btn-xs" style="position: absolute;"><i class="fa fa-remove"></i></button>
-                  <img src="{{ url($photo->url) }}" class="img-responsive">
-                </div>
-              </form>
-            @endforeach
-          </div>
-        </div>
-      </div>
-    </div>
   </form>
 </div>
+
 
 
 @stop
@@ -160,6 +163,7 @@ $('#datepicker').datepicker({
 });
 //CK EDITOR
 CKEDITOR.replace('editor');
+CKEDITOR.config.height = 315;
 
 var myDropzone = new Dropzone('.dropzone', {
 	url: '/admin/posts/{{ $post->url }}/photos',
