@@ -69,6 +69,11 @@ header nav li a:hover{
 .post .tag{
 	margin: 0 5px;
 }
+.post .tag a{
+	color: gray;
+	font-size: inherit;
+	font-weight: unset;
+}
 .post footer{
 	margin-top: 45px;
 	background: none;
