@@ -52,6 +52,11 @@
                 <textarea name="body" id="editor" class="form-control" id="" rows="10" placeholder="Ingresa el contenido de la publicación">{{ old('body', $post->body) }}</textarea>
                 {!! $errors->first('body','<span class="help-block">:message</span>') !!}
               </div>
+              <div class="form-group {{$errors->has('iframe') ? 'has-error' : ''}}">
+                <label for="">Contenido embebido(iframe)</label>
+                <textarea name="iframe" id="editor" class="form-control" id="" rows="2" placeholder="Ingresa contenido embebido(iframe) de audio o video">{{ old('iframe', $post->iframe) }}</textarea>
+                {!! $errors->first('iframe','<span class="help-block">:message</span>') !!}
+              </div>
             </div>
           <!-- /.box-body -->
       </div>
