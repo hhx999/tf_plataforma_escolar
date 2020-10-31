@@ -78,17 +78,17 @@
           </div>
           <!-- /Date -->
           <!-- Categories -->
-          <div class="form-group {{$errors->has('category') ? 'has-error' : ''}}">
+          <div class="form-group {{$errors->has('category_id') ? 'has-error' : ''}}">
             <label>Categoría:</label>
-            <select name="category" id="" class="form-control select2">
+            <select name="category_id" id="" class="form-control select2">
               <option value="" selected disabled>Selecciona una categoría</option>
               @foreach($categories as $category)
                 <option value="{{ $category->id }}"
-                  {{ old('category',$post->category_id) == $category->id ? 'selected' : '' }}
+                  {{ old('category_id',$post->category_id) == $category->id ? 'selected' : '' }}
                   >{{ $category->name }}</option>
               @endforeach
             </select>
-            {!! $errors->first('category','<span class="help-block">:message</span>') !!}
+            {!! $errors->first('category_id','<span class="help-block">:message</span>') !!}
           </div>
           <!--/Categories -->
           <!-- Tags -->
