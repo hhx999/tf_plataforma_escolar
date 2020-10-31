@@ -80,7 +80,7 @@
           <!-- Categories -->
           <div class="form-group {{$errors->has('category') ? 'has-error' : ''}}">
             <label>Categoría:</label>
-            <select name="category" id="" class="form-control">
+            <select name="category" id="" class="form-control select2">
               <option value="" selected disabled>Selecciona una categoría</option>
               @foreach($categories as $category)
                 <option value="{{ $category->id }}"
@@ -161,7 +161,9 @@
 
 <script type="text/javascript">
 //Initialize Select2 Multiple Elements
-$(".select2").select2();
+$(".select2").select2({
+    tags:true
+});
 //Date picker
 $('#datepicker').datepicker({
   autoclose: true
