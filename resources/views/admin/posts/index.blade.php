@@ -43,14 +43,36 @@
                				<td>{{ $post->title }}</td>
                				<td>{{ $post->excerpt }}</td>
                				<td>
+                        <!-- Botón para ver post -->
                         <a 
                           href="{{ route('posts.show',$post) }}" 
                           class="btn btn-xs btn-default"
                           target="_blank">
                           <i class="fa fa-eye"></i>
                         </a>
-               					<a href="{{ route('admin.posts.edit',$post) }}" class="btn btn-xs btn-info"><i class="fa fa-pencil"></i></a>
-               					<a href="#" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                        <!-- /Botón para ver post -->
+
+                        <!-- Botón para editar post -->
+               					<a 
+                          href="{{ route('admin.posts.edit',$post) }}" 
+                          class="btn btn-xs btn-info">
+                          <i class="fa fa-pencil"></i>
+                        </a>
+                        <!-- /Botón para editar post -->
+
+                        <!-- Botón para eliminar post -->
+                        <form 
+                            action="{{ route('admin.posts.destroy', $post) }}" 
+                            method="POST" 
+                            style="display: inline;">
+                          {{ csrf_field() }} {{ method_field('DELETE') }}
+                 					<button  
+                            class="btn btn-xs btn-danger"
+                            onclick="return confirm('¿Eliminar registro?')">
+                            <i class="fa fa-times"></i>
+                          </button>
+                        </form>
+                        <!-- /Botón para eliminar post -->
                				</td>
                			</tr>
                		@endforeach

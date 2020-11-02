@@ -381,11 +381,16 @@ desired effect
 <!-- Bootstrap 3.3.6 -->
 <script src="{{asset('adminlte/bootstrap/js/bootstrap.min.js')}}"></script>
 
+@unless(request()->is('admin/posts/*'))
+  
+  @include('admin.posts.create')
+
+@endunless
+
 @stack('scripts')
 
 <!-- AdminLTE App -->
 <script src="{{asset('adminlte/js/app.min.js')}}"></script>
 
-@include('admin.posts.create')
 </body>
 </html>

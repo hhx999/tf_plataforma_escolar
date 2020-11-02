@@ -34,6 +34,10 @@ Route::group(['prefix' => 'admin',
 
 	Route::put('posts/{post}','PostsController@update')->name('admin.posts.update');
 
+	Route::delete('posts/{post}','PostsController@destroy')->name('admin.posts.destroy');
+
+
+
 	Route::post('posts/{post}/photos','PhotosController@store')->name('admin.posts.photos.store');
 
 	Route::delete('posts/{photo}','PhotosController@destroy')->name('admin.photos.destroy');
