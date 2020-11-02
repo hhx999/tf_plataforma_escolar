@@ -3,6 +3,7 @@
 use App\Post;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class PostsTableSeeder extends Seeder
 {
@@ -13,6 +14,8 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
+        //Limpiamos los registros de imágenes
+        Storage::disk('public')->deleteDirectory('posts');
         //Limpiamos la tabla
     	Post::truncate();
     	//Creamos registros
