@@ -46,10 +46,30 @@ class Post extends Model
                 ->where('published_at', '<=', Carbon::now())
                 ->latest('published_at');
     }
-    public function setTitleAttribute($title)
+    public static function create(array $attributes = [])
     {
-        $this->attributes['title'] = $title;
-        $this->attributes['url'] = str_slug($title);
+        #Creamos post con titulo
+        $post = static::query()->create($attributes);
+
+        $post->generateUrl();
+        
+        return $post;
+    }
+    public function generateUrl()
+    {
+        #Obtenemos la url y la hacemos amigable
+        $url = str_slug($this->title);
+
+        #Comprobamos si se duplica
+        if ( $this->whereUrl($url)->exists() ) {
+            #Si existe agregamos id al final
+            $url = $url . "-{$this->id}";
+        }
+
+        #Asignamos url al post 
+        $this->url = $url;
+
+        $this->save();
     }
     public function setPublishedAtAttribute($published_at)
     {

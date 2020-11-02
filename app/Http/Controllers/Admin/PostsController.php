@@ -31,7 +31,7 @@ class PostsController extends Controller
             'title' => 'required|min:5'
         ]);
         $post = Post::create($request->only('title'));
-        
+
         return redirect()->route('admin.posts.edit',$post);
     }    
     public function edit(Post $post)
