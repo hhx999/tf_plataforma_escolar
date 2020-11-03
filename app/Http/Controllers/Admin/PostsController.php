@@ -16,7 +16,11 @@ class PostsController extends Controller
     //
     public function index()
     {
-    	$posts = Post::all();
+        if ( auth()->user()->hasRole('Admin')) {
+            $posts = Post::all();
+        } else {
+        	$posts = auth()->user()->posts;
+        }
     	return view('admin.posts.index', compact('posts'));
     }
     public function create()
@@ -27,25 +31,32 @@ class PostsController extends Controller
     }
     public function store(Request $request)
     {
+        $this->authorize('create', new Post);
+
         $this->validate($request,[
             'title' => 'required|min:5'
         ]);
-        $post = Post::create([
-            'title' => $request->title,
-            'user_id' => auth()->id()
-        ]);
+        $post = Post::create( $request->all() );
 
         return redirect()->route('admin.posts.edit',$post);
     }    
     public function edit(Post $post)
     {
+        $this->authorize('view',$post);
+
         $tags = Tag::all();
         $categories = Category::all();
 
-        return view('admin.posts.edit', compact('categories','tags', 'post'));
+        return view('admin.posts.edit', [
+            'categories' => Category::all(),
+            'tags' => Tag::all(),
+            'post' => $post
+        ]);
     }
     public function update(Post $post, StorePostRequest $request)
     {
+        $this->authorize('update',$post);
+
         $post->update($request->all());
 
         $post->syncTags($request->tags);
@@ -54,6 +65,8 @@ class PostsController extends Controller
     }
     public function destroy(Post $post)
     {
+        $this->authorize('delete',$post);
+
         $post->delete();
         
         return redirect()
