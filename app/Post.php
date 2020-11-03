@@ -46,6 +46,10 @@ class Post extends Model
                 ->where('published_at', '<=', Carbon::now())
                 ->latest('published_at');
     }
+    public function isPublished()
+    {
+        return ! is_null($this->published_at) && $this->published_at < today();
+    }
     public static function create(array $attributes = [])
     {
         #Creamos post con titulo
