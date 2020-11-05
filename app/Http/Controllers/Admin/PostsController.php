@@ -16,11 +16,8 @@ class PostsController extends Controller
     //
     public function index()
     {
-        if ( auth()->user()->hasRole('Admin')) {
-            $posts = Post::all();
-        } else {
-        	$posts = auth()->user()->posts;
-        }
+        $posts = Post::allowed()->get();
+
     	return view('admin.posts.index', compact('posts'));
     }
     public function create()
@@ -42,7 +39,7 @@ class PostsController extends Controller
     }    
     public function edit(Post $post)
     {
-        $this->authorize('view',$post);
+        $this->authorize('update',$post);
 
         $tags = Tag::all();
         $categories = Category::all();
