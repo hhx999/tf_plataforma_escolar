@@ -38,6 +38,9 @@ Route::group(['prefix' => 'admin',
     //Users
     Route::resource('users','UsersController',[ 'as' => 'admin']);
 
+    //UsersRoles
+    Route::put('admin/{user}/roles','UsersRolesController@update')->name('admin.users.roles.update');
+
     //Photos
 	Route::post('posts/{post}/photos','PhotosController@store')->name('admin.posts.photos.store');
 
