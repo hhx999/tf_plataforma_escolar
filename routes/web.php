@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('email', function(){
+    return new App\Mail\LoginCredentials(App\User::first(), 'asd123');
+});
+
 //Pages Routes...
 Route::get('/','PagesController@home')->name('pages.home');
 Route::get('quienes-somos','PagesController@about')->name('pages.about');

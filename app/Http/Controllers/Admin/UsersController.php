@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\User;
 
+use App\Events\UserWasCreated;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Role;
@@ -66,6 +68,7 @@ class UsersController extends Controller
             $user->givePermissionTo($request->permissions);
         }
         //Enviar mail
+        UserWasCreated::dispatch($user,$data['password']);
         //Retornar usuario
         return redirect()->route('admin.users.index')->withFlash('El/la docente se ha registrado correctamente');
     }
