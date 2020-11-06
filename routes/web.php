@@ -42,6 +42,9 @@ Route::group(['prefix' => 'admin',
     //Users
     Route::resource('users','UsersController',[ 'as' => 'admin']);
 
+    //Roles
+    Route::resource('roles','RolesController',[ 'as' => 'admin']);
+
     //UsersRoles
     Route::middleware('role:Admin')
         ->put('admin/{user}/roles','UsersRolesController@update')
