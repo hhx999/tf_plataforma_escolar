@@ -19,11 +19,10 @@
 <div class="box box-primary">
 	<div class="box-header">
 		<h3 class="box-title">Listado de Docentes</h3>
-    <button class="btn btn-primary pull-right" 
-            data-toggle="modal" 
-            data-target="#myModal"> 
-            <i class="fa fa-plus"></i> Crear publicación
-    </button>
+    <a class="btn btn-primary pull-right" 
+        href="{{ route('admin.users.create') }}"> 
+            <i class="fa fa-plus"></i> Registrar docente
+    </a>
 	</div>
 		<!-- /.box-header -->
 		<div class="box-body">
