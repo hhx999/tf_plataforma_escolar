@@ -41,6 +41,9 @@ Route::group(['prefix' => 'admin',
     //UsersRoles
     Route::put('admin/{user}/roles','UsersRolesController@update')->name('admin.users.roles.update');
 
+    //UsersPermissions
+    Route::put('admin/{user}/permissions','UsersPermissionsController@update')->name('admin.users.permissions.update');
+
     //Photos
 	Route::post('posts/{post}/photos','PhotosController@store')->name('admin.posts.photos.store');
 
