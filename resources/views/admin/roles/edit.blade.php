@@ -17,6 +17,7 @@
 					
 					@include('admin.roles.form')
 
+					<button class="btn btn-primary btn-block">Actualizar rol</button>
 				</form>
 			</div>
 		</div>

@@ -31,5 +31,3 @@
 	<label>Permisos</label>
 	@include('admin.permissions.checkboxes', ['model' => $role])
 </div>
-
-<button class="btn btn-primary btn-block">Actualizar rol</button>

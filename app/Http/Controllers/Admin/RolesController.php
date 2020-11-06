@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Permission;
 
+use App\Http\Requests\SaveRolesRequest;
+
 class RolesController extends Controller
 {
     /**
@@ -42,14 +44,9 @@ class RolesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SaveRolesRequest $request)
     {
-        $data = $request->validate([
-            'name' => 'required|unique:roles',
-            'display_name' => 'required'
-        ]);
-
-        $role = Role::create($data);
+        $role = Role::create($request->validated());
 
         if($request->has('permissions'))
         {
@@ -91,13 +88,9 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(SaveRolesRequest $request, Role $role)
     {
-        $data = $request->validate([
-            'display_name' => 'required'
-        ]);
-
-        $role->update($data);
+        $role->update($request->validated());
 
         $role->permissions()->detach();
 
