@@ -48,6 +48,7 @@
 				<h3 class="box-title">Roles</h3>
 			</div>
 			<div class="box-body">
+				@role('Admin')
 				<form action="{{ route('admin.users.roles.update', $user) }}" method="POST">
 					{{ csrf_field() }} {{ method_field('PUT') }}
 					
@@ -55,6 +56,15 @@
 					
 					<button class="btn btn-primary btn-block">Actualizar roles</button>
 				</form>
+				@else
+					<ul class="list-group">
+						@forelse($user->roles as $role)
+							<li class="list-group-item">{{ $role->name }}</li>
+						@empty
+							<li class="list-group-item">No tiene roles asociados</li>
+						@endforelse
+					</ul>
+				@endrole
 			</div>
 		</div>
 		<div class="box box-primary">
@@ -62,6 +72,7 @@
 				<h3 class="box-title">Permisos</h3>
 			</div>
 			<div class="box-body">
+				@role('Admin')
 				<form action="{{ route('admin.users.permissions.update', $user) }}" method="POST">
 					{{ csrf_field() }} {{ method_field('PUT') }}
 					
@@ -69,6 +80,15 @@
 					')
 					<button class="btn btn-primary btn-block">Actualizar permisos</button>
 				</form>
+				@else
+					<ul class="list-group">
+						@forelse($user->permissions as $permission)
+							<li class="list-group-item">{{ $permission->name }}</li>
+						@empty
+							<li class="list-group-item">No tiene permisos</li>
+						@endforelse
+					</ul>
+				@endrole
 			</div>
 		</div>
 	</div>

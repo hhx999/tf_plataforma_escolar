@@ -43,10 +43,14 @@ Route::group(['prefix' => 'admin',
     Route::resource('users','UsersController',[ 'as' => 'admin']);
 
     //UsersRoles
-    Route::put('admin/{user}/roles','UsersRolesController@update')->name('admin.users.roles.update');
+    Route::middleware('role:Admin')
+        ->put('admin/{user}/roles','UsersRolesController@update')
+        ->name('admin.users.roles.update');
 
     //UsersPermissions
-    Route::put('admin/{user}/permissions','UsersPermissionsController@update')->name('admin.users.permissions.update');
+    Route::middleware('role:Admin')
+        ->put('admin/{user}/permissions','UsersPermissionsController@update')
+        ->name('admin.users.permissions.update');
 
     //Photos
 	Route::post('posts/{post}/photos','PhotosController@store')->name('admin.posts.photos.store');
