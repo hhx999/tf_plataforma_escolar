@@ -16,8 +16,8 @@ class UsersTableSeeder extends Seeder
         //
         Role::truncate();
 
-        $adminRole = Role::create(['name' => 'Admin']);
-        $writterRole = Role::create(['name' => 'Docente']);
+        $adminRole = Role::create(['name' => 'Admin', 'display_name' => 'Administrador']);
+        $writterRole = Role::create(['name' => 'Docente', 'display_name' => 'Docente']);
 
         //Limpiamos la tabla
     	User::truncate();

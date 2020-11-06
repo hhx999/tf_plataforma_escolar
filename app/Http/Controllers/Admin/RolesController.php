@@ -6,6 +6,7 @@ use Spatie\Permission\Models\Role;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Spatie\Permission\Models\Permission;
 
 class RolesController extends Controller
 {
@@ -29,7 +30,10 @@ class RolesController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.roles.create', [
+            'permissions' => Permission::pluck('name', 'id'),
+            'role' => new Role
+        ]);
     }
 
     /**
@@ -40,7 +44,19 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|unique:roles',
+            'display_name' => 'required'
+        ]);
+
+        $role = Role::create($data);
+
+        if($request->has('permissions'))
+        {
+            $role->givePermissionTo($request->permissions);
+        }
+
+        return redirect()->route('admin.roles.index')->withFlash('El rol fue creado correctamente');
     }
 
     /**
@@ -60,9 +76,12 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Role $role)
     {
-        //
+        return view('admin.roles.edit', [
+            'permissions' => Permission::pluck('name', 'id'),
+            'role' => $role
+        ]);
     }
 
     /**
@@ -72,9 +91,23 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Role $role)
     {
-        //
+        $data = $request->validate([
+            'display_name' => 'required'
+        ]);
+
+        $role->update($data);
+
+        $role->permissions()->detach();
+
+        if($request->has('permissions'))
+        {
+            $role->givePermissionTo($request->permissions);
+        }
+
+        return redirect()->route('admin.roles.edit', $role)->withFlash('El rol fue actualizado correctamente');
+
     }
 
     /**
