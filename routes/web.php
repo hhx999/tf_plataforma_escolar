@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('email', function(){
-    return new App\Mail\LoginCredentials(App\User::first(), 'asd123');
-});
-
 //Pages Routes...
 Route::get('/','PagesController@home')->name('pages.home');
 Route::get('quienes-somos','PagesController@about')->name('pages.about');
@@ -37,13 +33,13 @@ Route::group(['prefix' => 'admin',
 
     Route::get('/','AdminController@index')->name('dashboard');
     //Posts
-    Route::resource('posts','PostsController',['except' => 'show', 'as' => 'admin']);
+    Route::resource('posts','PostsController',[ 'except' => 'show', 'as' => 'admin' ]);
 
     //Users
-    Route::resource('users','UsersController',[ 'as' => 'admin']);
+    Route::resource('users','UsersController',[ 'as' => 'admin' ]);
 
     //Roles
-    Route::resource('roles','RolesController',[ 'as' => 'admin']);
+    Route::resource('roles','RolesController',[ 'except' => 'show', 'as' => 'admin']);
 
     //UsersRoles
     Route::middleware('role:Admin')

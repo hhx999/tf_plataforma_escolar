@@ -44,14 +44,6 @@
                				<td>{{ $role->display_name }}</td>
                       <td>{{ $role->permissions->pluck('display_name')->implode(', ') }}</td>
                				<td>
-                        <!-- Botón para ver role -->
-                        <a 
-                          href="{{ route('admin.roles.show',$role) }}" 
-                          class="btn btn-xs btn-default">
-                          <i class="fa fa-eye"></i>
-                        </a>
-                        <!-- /Botón para ver role -->
-
                         <!-- Botón para editar role -->
                					<a 
                           href="{{ route('admin.roles.edit',$role) }}" 
@@ -61,6 +53,7 @@
                         <!-- /Botón para editar role -->
 
                         <!-- Botón para eliminar role -->
+                        @if( $role->id !== 1 )
                         <form 
                             action="{{ route('admin.roles.destroy', $role) }}" 
                             method="POST" 
@@ -72,6 +65,7 @@
                             <i class="fa fa-times"></i>
                           </button>
                         </form>
+                        @endif
                         <!-- /Botón para eliminar post -->
                				</td>
                			</tr>
