@@ -19,10 +19,14 @@
 <div class="box box-primary">
 	<div class="box-header">
 		<h3 class="box-title">Listado de Docentes</h3>
-    <a class="btn btn-primary pull-right" 
-        href="{{ route('admin.users.create') }}"> 
-            <i class="fa fa-plus"></i> Registrar docente
-    </a>
+    <!-- Botón para registrar docente -->
+    @can('create', $users->first()) 
+      <a class="btn btn-primary pull-right" 
+          href="{{ route('admin.users.create') }}"> 
+              <i class="fa fa-plus"></i> Registrar docente
+      </a>
+    @endcan
+    <!-- /Botón para registrar docente -->
 	</div>
 		<!-- /.box-header -->
 		<div class="box-body">
@@ -45,33 +49,39 @@
                       <td>{{ $user->getRoleNames()->implode(', ') }}</td>
                				<td>
                         <!-- Botón para ver user -->
-                        <a 
-                          href="{{ route('admin.users.show',$user) }}" 
-                          class="btn btn-xs btn-default">
-                          <i class="fa fa-eye"></i>
-                        </a>
+                        @can('view', $user)
+                          <a 
+                            href="{{ route('admin.users.show',$user) }}" 
+                            class="btn btn-xs btn-default">
+                            <i class="fa fa-eye"></i>
+                          </a>
+                        @endcan
                         <!-- /Botón para ver user -->
 
                         <!-- Botón para editar user -->
-               					<a 
-                          href="{{ route('admin.users.edit',$user) }}" 
-                          class="btn btn-xs btn-info">
-                          <i class="fa fa-pencil"></i>
-                        </a>
+                        @can('update', $user)
+                 					<a 
+                            href="{{ route('admin.users.edit',$user) }}" 
+                            class="btn btn-xs btn-info">
+                            <i class="fa fa-pencil"></i>
+                          </a>
+                        @endcan
                         <!-- /Botón para editar user -->
 
                         <!-- Botón para eliminar user -->
-                        <form 
-                            action="{{ route('admin.users.destroy', $user) }}" 
-                            method="POST" 
-                            style="display: inline;">
-                          {{ csrf_field() }} {{ method_field('DELETE') }}
-                 					<button  
-                            class="btn btn-xs btn-danger"
-                            onclick="return confirm('¿Eliminar registro?')">
-                            <i class="fa fa-times"></i>
-                          </button>
-                        </form>
+                        @can('delete', $user)
+                          <form 
+                              action="{{ route('admin.users.destroy', $user) }}" 
+                              method="POST" 
+                              style="display: inline;">
+                            {{ csrf_field() }} {{ method_field('DELETE') }}
+                   					<button  
+                              class="btn btn-xs btn-danger"
+                              onclick="return confirm('¿Eliminar registro?')">
+                              <i class="fa fa-times"></i>
+                            </button>
+                          </form>
+                        @endcan
                         <!-- /Botón para eliminar post -->
                				</td>
                			</tr>

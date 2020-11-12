@@ -19,10 +19,14 @@
 <div class="box box-primary">
 	<div class="box-header">
 		<h3 class="box-title">Listado de Roles</h3>
-    <a class="btn btn-primary pull-right" 
-        href="{{ route('admin.roles.create') }}"> 
-            <i class="fa fa-plus"></i> Registrar Rol
-    </a>
+    <!-- Botón para registrar rol -->
+    @can('create', $roles->first())
+      <a class="btn btn-primary pull-right" 
+          href="{{ route('admin.roles.create') }}"> 
+              <i class="fa fa-plus"></i> Registrar Rol
+      </a>
+    @endcan
+    <!-- /Botón para registrar rol -->
 	</div>
 		<!-- /.box-header -->
 		<div class="box-body">
@@ -45,27 +49,31 @@
                       <td>{{ $role->permissions->pluck('display_name')->implode(', ') }}</td>
                				<td>
                         <!-- Botón para editar role -->
-               					<a 
-                          href="{{ route('admin.roles.edit',$role) }}" 
-                          class="btn btn-xs btn-info">
-                          <i class="fa fa-pencil"></i>
-                        </a>
+                        @can('update', $role)
+                 					<a 
+                            href="{{ route('admin.roles.edit',$role) }}" 
+                            class="btn btn-xs btn-info">
+                            <i class="fa fa-pencil"></i>
+                          </a>
+                        @endcan
                         <!-- /Botón para editar role -->
 
                         <!-- Botón para eliminar role -->
-                        @if( $role->id !== 1 )
-                        <form 
-                            action="{{ route('admin.roles.destroy', $role) }}" 
-                            method="POST" 
-                            style="display: inline;">
-                          {{ csrf_field() }} {{ method_field('DELETE') }}
-                 					<button  
-                            class="btn btn-xs btn-danger"
-                            onclick="return confirm('¿Eliminar registro?')">
-                            <i class="fa fa-times"></i>
-                          </button>
-                        </form>
-                        @endif
+                        @can('delete', $role)
+                          @if( $role->id !== 1 )
+                          <form 
+                              action="{{ route('admin.roles.destroy', $role) }}" 
+                              method="POST" 
+                              style="display: inline;">
+                            {{ csrf_field() }} {{ method_field('DELETE') }}
+                   					<button  
+                              class="btn btn-xs btn-danger"
+                              onclick="return confirm('¿Eliminar registro?')">
+                              <i class="fa fa-times"></i>
+                            </button>
+                          </form>
+                          @endif
+                        @endcan
                         <!-- /Botón para eliminar post -->
                				</td>
                			</tr>

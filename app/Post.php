@@ -52,11 +52,12 @@ class Post extends Model
     }
     public function scopeAllowed($query)
     {
-        if ( auth()->user()->can('view', $this)) {
+        if( auth()->user()->can('view', $this) )
+        {
             return $query;
         }
-        
-        return $query->where('user_id',auth()->id());
+
+        return $query->where('user_id', auth()->id());
     }
     public function isPublished()
     {
